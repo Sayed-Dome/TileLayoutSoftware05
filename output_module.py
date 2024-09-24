@@ -1,7 +1,10 @@
-from PIL import Image
-import numpy as np
+import matplotlib.pyplot as plt
 
-def save_rendering(rendering):
+def save_rendering(rendering: plt.Figure) -> None:
+    """
+    Save the rendered tile layout to a file.
+
+    Args:
+        rendering: Rendered tile layout
+    """
     rendering.savefig('tile_layout.png')
-    img = Image.open('tile_layout.png')
-    img.save('tile_layout.jpg')

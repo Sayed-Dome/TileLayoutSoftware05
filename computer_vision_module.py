@@ -1,7 +1,16 @@
 import cv2
 import numpy as np
 
-def detect_objects(image):
+def detect_objects(image: np.ndarray) -> list:
+    """
+    Detect objects in the tile layout image.
+
+    Args:
+        image: Tile layout image
+
+    Returns:
+        list: List of detected objects
+    """
     # Convert image to grayscale
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     # Apply threshold to segment out objects
@@ -10,10 +19,17 @@ def detect_objects(image):
     contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     return contours
 
-def recognize_objects(contours):
-    # Create a list to store recognized objects
+def recognize_objects(contours: list) -> list:
+    """
+    Recognize objects in the tile layout image.
+
+    Args:
+        contours: List of contours of objects
+
+    Returns:
+        list: List of recognized objects
+    """
     objects = []
-    # Iterate through contours
     for contour in contours:
         # Calculate area of contour
         area = cv2.contourArea(contour)

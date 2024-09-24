@@ -1,57 +1,49 @@
-import numpy as np
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton
+def get_room_dimensions() -> tuple:
+    """
+    Get room dimensions from user input.
 
-class InputModule(QWidget):
-    def __init__(self):
-        super().__init__()
+    Returns:
+        tuple: Room dimensions (width, length)
+    """
+    while True:
+        try:
+            width = float(input("Enter room width (in mm): "))
+            length = float(input("Enter room length (in mm): "))
+            if width <= 0 or length <= 0:
+                print("Invalid input. Please enter positive values.")
+            else:
+                return width, length
+        except ValueError:
+            print("Invalid input. Please enter numeric values.")
 
-        self.initUI()
+def get_tile_size() -> tuple:
+    """
+    Get tile size from user input.
 
-    def initUI(self):
-        self.setGeometry(300, 300, 300, 200)
-        self.setWindowTitle('Input Module')
+    Returns:
+        tuple: Tile size (width, length)
+    """
+    while True:
+        try:
+            width = float(input("Enter tile width (in mm): "))
+            length = float(input("Enter tile length (in mm): "))
+            if width <= 0 or length <= 0:
+                print("Invalid input. Please enter positive values.")
+            else:
+                return width, length
+        except ValueError:
+            print("Invalid input. Please enter numeric values.")
 
-        layout = QVBoxLayout()
+def get_layout_pattern() -> str:
+    """
+    Get layout pattern from user input.
 
-        label_width = QLabel('Width (mm):')
-        self.width_input = QLineEdit()
-        layout.addWidget(label_width)
-        layout.addWidget(self.width_input)
-
-        label_length = QLabel('Length (mm):')
-        self.length_input = QLineEdit()
-        layout.addWidget(label_length)
-        layout.addWidget(self.length_input)
-
-        label_pattern = QLabel('Layout Pattern:')
-        self.pattern_input = QLineEdit()
-        layout.addWidget(label_pattern)
-        layout.addWidget(self.pattern_input)
-
-        button_submit = QPushButton('Submit')
-        button_submit.clicked.connect(self.submit)
-        layout.addWidget(button_submit)
-
-        self.setLayout(layout)
-
-    def submit(self):
-        width = float(self.width_input.text())
-        length = float(self.length_input.text())
-        pattern = self.pattern_input.text()
-        self.close()
-        return width, length, pattern
-
-    def get_room_dimensions(self):
-        return self.submit()
-
-    def get_tile_size(self):
-        return self.submit()
-
-    def get_layout_pattern(self):
-        return self.submit()
-
-if __name__ == "__main__":
-    app = QApplication([])
-    input_module = InputModule()
-    input_module.show()
-    app.exec_()
+    Returns:
+        str: Layout pattern (brick, herringbone, hexagonal)
+    """
+    while True:
+        pattern = input("Enter layout pattern (brick, herringbone, hexagonal): ")
+        if pattern.lower() in ["brick", "herringbone", "hexagonal"]:
+            return pattern.lower()
+        else:
+            print("Invalid input. Please enter a valid layout pattern.")

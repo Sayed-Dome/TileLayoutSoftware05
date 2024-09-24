@@ -1,8 +1,32 @@
-def optimize_cutting(tile_size, num_tiles):
-    width, length = tile_size
-    waste = 0
-    for i in range(int(num_tiles)):
-        for j in range(int(num_tiles)):
-            if (i + j) % 2 == 0:
-                waste += width * length
-    return waste
+class CuttingOptimization:
+    def __init__(self):
+        self.cutting_optimization = []
+
+    def add_cut(self, cut):
+        self.cutting_optimization.append(cut)
+
+    def remove_cut(self, cut):
+        self.cutting_optimization.remove(cut)
+
+    def get_cutting_optimization(self):
+        return self.cutting_optimization
+
+class MinimizeWaste(CuttingOptimization):
+    def __init__(self):
+        super().__init__()
+
+    def add_cut(self, cut):
+        if len(self.cutting_optimization) % 2 == 0:
+            self.cutting_optimization.append(cut)
+        else:
+            self.cutting_optimization.insert(0, cut)
+
+class MaximizeYield(CuttingOptimization):
+    def __init__(self):
+        super().__init__()
+
+    def add_cut(self, cut):
+        if len(self.cutting_optimization) % 2 == 0:
+            self.cutting_optimization.append(cut)
+        else:
+            self.cutting_optimization.insert(0, cut)
