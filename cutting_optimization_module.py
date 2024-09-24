@@ -1,8 +1,8 @@
 def optimize_cutting(tile_size, num_tiles):
-    # Implement algorithms to optimize tile cutting and minimize waste
-    # For example, we can use a greedy algorithm to minimize waste
+    width, length = tile_size
     waste = 0
-    for i in range(num_tiles):
-        # Calculate the waste for each tile
-        waste += tile_size * (i % 2)
+    for i in range(int(num_tiles)):
+        for j in range(int(num_tiles)):
+            if (i + j) % 2 == 0:
+                waste += width * length
     return waste

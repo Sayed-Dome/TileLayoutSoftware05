@@ -1,5 +1,12 @@
 def calculate_num_tiles(room_dimensions, tile_size, layout_pattern):
-    # Calculate the number of tiles needed based on the input parameters
-    # This is a simplified example and may need to be modified for different layout patterns
-    num_tiles = (room_dimensions[0] * room_dimensions[1]) / (tile_size[0] * tile_size[1])
+    width, length = room_dimensions
+    tile_width, tile_length = tile_size
+
+    if layout_pattern == "Brick":
+        num_tiles = (width * length) / (tile_width * tile_length)
+    elif layout_pattern == "Herringbone":
+        num_tiles = (width * length) / (tile_width * tile_length)
+    elif layout_pattern == "Hexagonal":
+        num_tiles = (width * length) / (tile_width * tile_length)
+
     return num_tiles

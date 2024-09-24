@@ -1,5 +1,5 @@
 def brick_pattern(tile_size):
-    # Define the brick pattern
+    width, length = tile_size
     pattern = []
     for i in range(10):
         row = []
@@ -9,10 +9,8 @@ def brick_pattern(tile_size):
             else:
                 row.append(0)
         pattern.append(row)
-    return pattern
-
 def herringbone_pattern(tile_size):
-    # Define the herringbone pattern
+    width, length = tile_size
     pattern = []
     for i in range(10):
         row = []
@@ -25,7 +23,7 @@ def herringbone_pattern(tile_size):
     return pattern
 
 def hexagonal_pattern(tile_size):
-    # Define the hexagonal pattern
+    width, length = tile_size
     pattern = []
     for i in range(10):
         row = []
