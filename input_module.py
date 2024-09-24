@@ -1,79 +1,57 @@
-import tkinter as tk
-from tkinter import messagebox
+import numpy as np
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton
 
-def get_room_dimensions():
-    root = tk.Tk()
-    root.title("Room Dimensions")
+class InputModule(QWidget):
+    def __init__(self):
+        super().__init__()
 
-    label_width = tk.Label(root, text="Width (mm):")
-    label_width.pack()
-    entry_width = tk.Entry(root)
-    entry_width.pack()
+        self.initUI()
 
-    label_length = tk.Label(root, text="Length (mm):")
-    label_length.pack()
-    entry_length = tk.Entry(root)
-    entry_length.pack()
+    def initUI(self):
+        self.setGeometry(300, 300, 300, 200)
+        self.setWindowTitle('Input Module')
 
-    def submit():
-        width = float(entry_width.get())
-        length = float(entry_length.get())
-        root.destroy()
-        return width, length
+        layout = QVBoxLayout()
 
-    button_submit = tk.Button(root, text="Submit", command=submit)
-    button_submit.pack()
+        label_width = QLabel('Width (mm):')
+        self.width_input = QLineEdit()
+        layout.addWidget(label_width)
+        layout.addWidget(self.width_input)
 
-    root.mainloop()
-    return submit()
+        label_length = QLabel('Length (mm):')
+        self.length_input = QLineEdit()
+        layout.addWidget(label_length)
+        layout.addWidget(self.length_input)
 
-def get_tile_size():
-    root = tk.Tk()
-    root.title("Tile Size")
+        label_pattern = QLabel('Layout Pattern:')
+        self.pattern_input = QLineEdit()
+        layout.addWidget(label_pattern)
+        layout.addWidget(self.pattern_input)
 
-    label_width = tk.Label(root, text="Width (mm):")
-    label_width.pack()
-    entry_width = tk.Entry(root)
-    entry_width.pack()
+        button_submit = QPushButton('Submit')
+        button_submit.clicked.connect(self.submit)
+        layout.addWidget(button_submit)
 
-    label_length = tk.Label(root, text="Length (mm):")
-    label_length.pack()
-    entry_length = tk.Entry(root)
-    entry_length.pack()
+        self.setLayout(layout)
 
-    def submit():
-        width = float(entry_width.get())
-        length = float(entry_length.get())
-        root.destroy()
-        return width, length
+    def submit(self):
+        width = float(self.width_input.text())
+        length = float(self.length_input.text())
+        pattern = self.pattern_input.text()
+        self.close()
+        return width, length, pattern
 
-    button_submit = tk.Button(root, text="Submit", command=submit)
-    button_submit.pack()
+    def get_room_dimensions(self):
+        return self.submit()
 
-    root.mainloop()
-    return submit()
+    def get_tile_size(self):
+        return self.submit()
 
-def get_layout_pattern():
-    root = tk.Tk()
-    root.title("Layout Pattern")
+    def get_layout_pattern(self):
+        return self.submit()
 
-    label_pattern = tk.Label(root, text="Select a pattern:")
-    label_pattern.pack()
-
-    patterns = ["Brick", "Herringbone", "Hexagonal"]
-    variable = tk.StringVar(root)
-    variable.set(patterns[0])
-
-    option_menu = tk.OptionMenu(root, variable, *patterns)
-    option_menu.pack()
-
-    def submit():
-        pattern = variable.get()
-        root.destroy()
-        return pattern
-
-    button_submit = tk.Button(root, text="Submit", command=submit)
-    button_submit.pack()
-
-    root.mainloop()
-    return submit()
+if __name__ == "__main__":
+    app = QApplication([])
+    input_module = InputModule()
+    input_module.show()
+    app.exec_()

@@ -1,3 +1,6 @@
+import numpy as np
+from scipy import optimize
+
 def calculate_num_tiles(room_dimensions, tile_size, layout_pattern):
     width, length = room_dimensions
     tile_width, tile_length = tile_size
